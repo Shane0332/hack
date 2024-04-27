@@ -3,16 +3,11 @@ import React from 'react'
 function AddPlace() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-    {/* Status bar */}
-    <div className="flex items-center justify-between h-4 bg-gray-700 text-white px-4">
-        <div>4:52</div>
-        <div><span>1</span> <i className="fas fa-signal"></i> 65%</div>
-    </div>
+
 
     {/* App bar */}
     <div className="flex items-center justify-between h-14 bg-white px-4 shadow-md">
         <div className="text-xl font-bold">Places</div>
-        <div className="text-lg">Speed limit</div>
     </div>
 
     {/* Content */}

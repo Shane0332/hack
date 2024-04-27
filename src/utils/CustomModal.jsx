@@ -2,7 +2,6 @@ import { Modal, Box } from "@mui/material";
 const CustomModal = ({
   open,
   setOpen,
-  activeItem,
   component: Component,
   setRoute,
 }) => {

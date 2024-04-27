@@ -8,8 +8,8 @@ import Admin from "./pages/Profile/Admin";
 import AddCourse from "./components/Course/AddCourse";
 import CourseAccess from "./pages/Courses/CourseAccess";
 import CreatRoom from "./pages/Home/CreateRoom/CreatRoom";
-import AddPlace from "./pages/Home/Places/AddPlace";
-import Map from "./pages/Home/Places/MapPlace";
+import AddPlace from "./pages/Places/AddPlace";
+import Map from "./pages/Places/MapPlace";
 
 
 function App() {

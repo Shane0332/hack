@@ -31,6 +31,6 @@ function CreatRoom() {
       </div>
     </div>
   )
-}
+};
 
 export default CreatRoom

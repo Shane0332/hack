@@ -96,7 +96,7 @@ const Header = ({ open, setOpen, activeItem, route, setRoute }) => {
             <div className="w-[70%] fixed z-[99999999] h-screen bg-slate-900 bg-opacity-90 top-0 right-0">
               <NavItems activeItem={activeItem} isMobile={true} />
               <button
-                className="cursor-pointer ml-5 my-2 text-white"
+                className="cursor-pointer ml-5 my-2 mt-10 text-white"
                 onClick={() => setOpen(true)}
               >
                 Нэвтрэх
