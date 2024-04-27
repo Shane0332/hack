@@ -1,99 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import { loadScript } from '@google/maps';
-import { GoogleMap, LoadScript, Marker, SearchBox, InfoWindow } from '@react-google-maps/api';
 
-const libraries = ['places']; // Include the Places library for search functionality
+import React, { Component } from 'react';
 
-const center = { lat: 40.7128, lng: -74.0059 }; // Replace with your desired initial center coordinates
+class Map extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: null,
+      marker: null,
+      selectedLocation: null,
+      circle: null,
+      circleRadius: 5000
+    };
+  }
 
-const MapComponent = () => {
-  const [map, setMap] = useState(null);
-  const [markers, setMarkers] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  componentDidMount() {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5mlYEy09B3Mr2nN4PAJXYA6CAvyq01k&callback=initMap`;
+    script.async = true;
+    document.body.appendChild(script);
+    window.initMap = this.initMap;
+  }
 
-  const loadMap = async () => {
-    try {
-      await loadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, // Use environment variable
-        libraries,
+  initMap = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+      const userLocation = { lat: latitude, lng: longitude };
+      const map = new window.google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 10
       });
-      const google = await window.google;
-      const mapInstance = new google.maps.Map(document.getElementById('map'), {
-        center,
-        zoom: 11,
+      const marker = new window.google.maps.Marker({
+        position: userLocation,
+        map: map,
+        title: 'Your Location',
+        draggable: true
       });
-      setMap(mapInstance);
-    } catch (error) {
-      console.error('Error loading Google Maps:', error);
+      const circle = new window.google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: userLocation,
+        radius: this.state.circleRadius
+      });
+      marker.setPosition(circle.getCenter());
+      marker.addListener('dragend', () => {
+        const newPosition = marker.getPosition();
+        this.setState({ 
+          selectedLocation: { lat: newPosition.lat(), lng: newPosition.lng() },
+          circleRadius: this.state.circleRadius
+        });
+        circle.setCenter(newPosition);
+      });
+      this.setState({ map, marker, circle });
+    }, error => {
+      console.error('Error getting user location:', error);
+    });
+  }
+
+  handleSaveLocation = () => {
+    const { selectedLocation } = this.state;
+    if (selectedLocation) {
+      console.log('Selected location:', selectedLocation);
+    } else {
+      console.error('No location selected.');
     }
-  };
+  }
 
-  useEffect(() => {
-    loadMap();
-  }, []);
+  handleIncreaseCircleSize = () => {
+    const { circle, circleRadius } = this.state;
+    if (circle) {
+      const newRadius = circleRadius + 1000;
+      circle.setRadius(newRadius);
+      this.setState({ circleRadius: newRadius });
+    }
+  }
 
-  const handleSearchBoxPlaces = (results) => {
-    const safeAreaMarkers = results.filter((place) => place.name.toLowerCase().includes('safe area'));
-    setMarkers(safeAreaMarkers);
-  };
+  handleDecreaseCircleSize = () => {
+    const { circle, circleRadius } = this.state;
+    if (circle && circleRadius > 1000) {
+      const newRadius = circleRadius - 1000;
+      circle.setRadius(newRadius);
+      this.setState({ circleRadius: newRadius });
+    }
+  }
 
-  const handleSave = () => {
-    // Implement logic to save the selected place (if any)
-    console.log('Saving place:', selectedPlace); // For demonstration purposes
-  };
+  handleLeadToArea = () => {
+    const { map, marker, selectedLocation } = this.state;
+    if (map && marker && selectedLocation) {
+      map.setCenter(selectedLocation);
+      marker.setPosition(selectedLocation);
+    }
+  }
 
-  const handleMarkerClick = (place) => {
-    setSelectedPlace(place);
-  };
+  render() {
+    const { circleRadius } = this.state;
+    return (
+      <div className="flex flex-col items-center">
+        <div id="map" className="w-full h-96 md:h-screen"></div>
+        <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-x-2 md:space-y-0 mt-4">
+          <button onClick={this.handleSaveLocation} className="btn">
+            Save Location
+          </button>
+          <button onClick={this.handleIncreaseCircleSize} className="btn">
+            Increase Circle Size
+          </button>
+          <button onClick={this.handleDecreaseCircleSize} className="btn">
+            Decrease Circle Size
+          </button>
+          <button onClick={this.handleLeadToArea} className="btn">
+            Lead to Area
+          </button>
+        </div>
+        <div className="mt-4 text-center">
+          <p>Circle Size: {circleRadius.toFixed(0)} meters</p>
+        </div>
+      </div>
+    );
+  }
+}
 
-  return (
-    <div>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
-        <GoogleMap mapContainerStyle={{ width: '100%', height: '400px' }} zoom={11} center={center} zoomControl={true} map={map} onClick={() => setSelectedPlace(null)}>
-          <SearchBox
-            bounds={map?.getBounds()}
-            controlPosition={google.maps.ControlPosition.TOP_LEFT}
-            onPlacesChanged={handleSearchBoxPlaces}
-          >
-            <input
-              type="text"
-              placeholder="Search for safe areas"
-              style={{
-                boxSizing: `border-box`,
-                border: `1px solid transparent`,
-                width: `100%`,
-                padding: `0.625em 1em`,
-                borderRadius: `4px`,
-                fontSize: `16px`,
-                outline: `none`,
-                boxShadow: `0 0 0 1px rgba(0, 0, 0, 0.15)`,
-                lineHeight: `normal`,
-                textOverflow: `ellipsis`,
-                height: `40px`,
-                backgroundColor: `rgb(255, 255, 255)`,
-              }}
-            />
-          </SearchBox>
-          {markers.map((marker) => (
-            <Marker
-              key={marker.place_id}
-              position={marker.geometry.location}
-              onClick={() => handleMarkerClick(marker)}
-            >
-              {selectedPlace === marker && (
-                <InfoWindow onCloseClick={() => setSelectedPlace(null)}>
-                  <div>{marker.name}</div>
-                </InfoWindow>
-              )}
-            </Marker>
-          ))}
-        </GoogleMap>
-      </LoadScript>
-      <button onClick={handleSave} disabled={!selectedPlace}>
-        Save Safe Area
-      </button>
-    </div>
-  );
-};
-
-export default MapComponent;
+export default Map;
