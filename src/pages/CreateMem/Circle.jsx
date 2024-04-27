@@ -50,7 +50,7 @@ const Circle = () => {
       DONE? (Tap to go back)
     </button>
     </Link>
-  </div>
+    </div>
   </div>
     )
   

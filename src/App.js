@@ -10,6 +10,15 @@ import CourseAccess from "./pages/Courses/CourseAccess";
 import CreatRoom from "./pages/Home/CreateRoom/CreatRoom";
 import AddPlace from "./pages/Places/AddPlace";
 import Map from "./pages/Places/MapPlace";
+import Menu from './pages/CreateMem/Menu';
+import Safety from './pages/CreateMem/Safety';
+import CreateMem from './pages/CreateMem/CreateMem';
+import Circle from "./pages/CreateMem/Circle";
+import Pro from "./pages/CreateMem/pro";
+
+
+
+
 
 
 function App() {
@@ -20,13 +29,17 @@ function App() {
         <Route path="profile" element={<ProfilePage />} />
         <Route path="createRoom" element={<CreatRoom />} />
         <Route path="mapPlace" element={<Map />} />
-
+        <Route path="Menu" element={<Menu/>}/>
+        <Route path="Safety" element={<Safety/>}/>
         <Route path="AddPlace" element={<AddPlace />} />
         <Route path="admin" element={<Admin />} />
         <Route path="courses" element={<Courses />} />
+        <Route path="addmember" element={<CreateMem />} />
         <Route path="course/:courseId" element={<CourseDetail />} />
         <Route path="course-access/:courseId" element={<CourseAccess />} />
         <Route path="add-course" element={<AddCourse />} />
+        <Route path="Circle" element={<Circle />} />
+        <Route path="pro" element={<Pro />} />
       </Route>
     </Routes>
   );

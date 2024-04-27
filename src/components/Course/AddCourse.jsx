@@ -197,7 +197,7 @@ const AddCourse = () => {
     if (!loading && videoUrls.length > 0) {
       dataSet();
     }
-  }, []);
+  }, [dataSet, loading, videoUrls.length]);
 
   const handleCourseCreate = async () => {
     try {
