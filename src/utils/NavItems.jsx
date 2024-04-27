@@ -20,7 +20,7 @@ const NavItems = ({ activeItem, isMobile }) => {
             <Link to={item.url} key={index}>
               <span
                 className={`${
-                  activeItem === index ? "text-[#37a39a]" : "text-white"
+                  activeItem === index ? "text-[#FFFFFF]" : "text-white"
                 }  text-[18px] px-6 font-Poppins font-[400]`}
               >
                 {item.name}
@@ -34,7 +34,7 @@ const NavItems = ({ activeItem, isMobile }) => {
             <Link to="/"
               className={`text-[25px] font-Poppins font-[500] text-white`}
             >
-              SafetyforChild
+              SafetyChild
             </Link>
           </div>
           {navItemsData &&
@@ -42,8 +42,8 @@ const NavItems = ({ activeItem, isMobile }) => {
               <Link to={item.url} key={index}>
                 <span
                   className={`${
-                    activeItem === index ? "text-[#37a39a]" : "text-white"
-                  } block py-5 text-[18px] px-6 font-Poppins font-[400]`}
+                    activeItem === index ? "text-[#FFFFFF]" : "text-white"
+                  } block py-5 text-[16px] px-6 font-Poppins font-[400]`}
                 >
                   {item.name}
                 </span>

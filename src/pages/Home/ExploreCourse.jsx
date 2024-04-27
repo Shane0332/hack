@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 const ExploreCourse = () => {
   return (
-    <div className="w-[95%] m-auto flex justify-center items-center h-[20] 800px:h-[60vh] translate-y-0 opacity-100 transition-all duration-1000 ease-in-out">
+    <div className="w-[95%] m-auto flex justify-center items-center h-[20] 800px:h-[50vh] translate-y-0 opacity-100 transition-all duration-1000 ease-in-out">
       <div className="w-[90%] 800px:w-[80%]">
         <h1 className="font-extrabold text-[25px] leading-[35px] sm:text-3xl lg:text-5xl tracking-tight text-center text-white font-Poppins 800px:!leading-[60px] ">
           Family <span className="text-gradient">360</span>{" "}

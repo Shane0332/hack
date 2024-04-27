@@ -54,7 +54,7 @@ const Header = ({ open, setOpen, activeItem, route, setRoute }) => {
               <div className="800px:hidden">
                 <HiOutlineMenuAlt3
                   size={25}
-                  className="cursor-pointer text-black"
+                  className="cursor-pointer text-white"
                   onClick={() => setOpenSideBar(true)}
                 />
               </div>
@@ -95,17 +95,14 @@ const Header = ({ open, setOpen, activeItem, route, setRoute }) => {
           >
             <div className="w-[70%] fixed z-[99999999] h-screen bg-slate-900 bg-opacity-90 top-0 right-0">
               <NavItems activeItem={activeItem} isMobile={true} />
-              <HiOutlineUserCircle
-                size={25}
-                className="cursor-pointer ml-5 my-2 text-black"
+              <button
+                className="cursor-pointer ml-5 my-2 text-white"
                 onClick={() => setOpen(true)}
-              />
-              <br />
-              <br />
-              <p className="text-[16px] px-2 pl-5 text-black">
-                Copyright © 2023 Elearning
-              </p>
+              >
+                Нэвтрэх
+              </button>
             </div>
+
           </div>
         )}
       </div>

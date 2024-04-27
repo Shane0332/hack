@@ -33,16 +33,14 @@ const Home = () => {
             setRoute={setRoute}
           />
           <ExploreCourse />
-          
-          <div> 
-
+          <div>
             <div className="w-[90%] 800px:w-[80%] m-auto">
               <h1 className="text-center font-Poppins text-[25px] leading-[35px] sm:text-3xl lg:text-4xl dark:text-white 800px:!leading-[60px] text-white font-extrabold tracking-tight">
                 {`Монголын улсад тулгамдаж буй хүүхдийн`}
                 <span className="text-gradient"></span>
                 <br />
                 <span className="text-gradient">Аюулгүй байдал</span>
-                {`-ыг хангах систем`}
+                {`-ийг хангах систем`}
               </h1>
               <br />
               <br />

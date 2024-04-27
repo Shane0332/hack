@@ -9,7 +9,7 @@ import AddCourse from "./components/Course/AddCourse";
 import CourseAccess from "./pages/Courses/CourseAccess";
 import CreatRoom from "./pages/Home/CreateRoom/CreatRoom";
 import AddPlace from "./pages/Home/Places/AddPlace";
-import MapPlace from "./pages/Home/Places/MapPlace";
+import Map from "./pages/Home/Places/MapPlace";
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="createRoom" element={<CreatRoom />} />
-        <Route path="mapPlace" element={<MapPlace />} />
+        <Route path="mapPlace" element={<Map />} />
 
         <Route path="AddPlace" element={<AddPlace />} />
         <Route path="admin" element={<Admin />} />
