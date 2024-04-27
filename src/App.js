@@ -15,6 +15,10 @@ import Safety from './pages/CreateMem/Safety';
 import CreateMem from './pages/CreateMem/CreateMem';
 import Circle from "./pages/CreateMem/Circle";
 import Pro from "./pages/CreateMem/pro";
+import SafeZone from "./pages/Places/SafeZone";
+import Lalar from "./pages/Home/CreateRoom/Lalar";
+
+
 
 
 
@@ -40,6 +44,9 @@ function App() {
         <Route path="add-course" element={<AddCourse />} />
         <Route path="Circle" element={<Circle />} />
         <Route path="pro" element={<Pro />} />
+        <Route path="SafeZone" element={<SafeZone />} />
+        <Route path="Lalar" element={<Lalar/>} />
+
       </Route>
     </Routes>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HiPlus } from 'react-icons/hi';
+import {Link} from 'react-router-dom';
 
 const Safety = () => {
   const [contacts, setContacts] = useState([]);
@@ -26,9 +27,9 @@ const Safety = () => {
       
       <div className="mb-8">
         <h2 className="text-xl font-semibold text-white mb-2">Emergency Contacts</h2>
-        <div className="flex mb-4">
+        <div className="flex flex-col md:flex-row mb-4 md:items-center">
           <button 
-            className="flex items-center bg-blue-500 text-white py-2 px-4 rounded mr-4"
+            className="flex items-center bg-blue-500 text-white py-2 px-4 rounded mb-2 md:mb-0 md:mr-4"
             onClick={addContact}
           >
             <HiPlus className="mr-2" /> Add Contact
@@ -41,7 +42,6 @@ const Safety = () => {
           </button>
         </div>
         <ul>
-            
           {contacts.map((contact, index) => (
             <li key={index} className="mb-1">{contact}</li>
           ))}
@@ -64,7 +64,24 @@ const Safety = () => {
       >
         Send Emergency Alert
       </button>
+      <div className="flex flex-col h-screen">
+      <div className="flex justify-between bg-gray-800 text-white px-4 py-2">
+        <Link to="/safety" className="text-xl font-bold">
+          Safety
+        </Link>
+        <Link to="/mapPlace" className="text-xl font-bold">
+          Places
+        </Link>
+        <Link to="/SafeZone" className="text-xl font-bold">
+          Safety-zone
+        </Link>
+        <Link to="/menu" className="text-xl font-bold">
+          Menu
+        </Link>
+      </div>
     </div>
+    </div>
+    
   );
 };
 
